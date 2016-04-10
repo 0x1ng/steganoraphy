@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>图片隐写加密／解密</title>
+	<style>
+	.mytxt {
+    color:#333;
+    line-height:normal;
+    font-family:"Microsoft YaHei",Tahoma,Verdana,SimSun;
+    font-style:normal;
+    font-variant:normal;
+    font-size-adjust:none;
+    font-stretch:normal;
+    font-weight:normal;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:0px;
+    padding-top:4px;
+    padding-right:4px;
+    padding-bottom:4px;
+    padding-left:4px;
+    font-size:15px;
+    outline-width:medium;
+    outline-style:none;
+    outline-color:invert;
+    border-top-left-radius:3px;
+    border-top-right-radius:3px;
+    border-bottom-left-radius:3px;
+    border-bottom-right-radius:3px;
+    text-shadow:0px 1px 2px #fff;
+    background-attachment:scroll;
+    background-repeat:repeat-x;
+    background-position-x:left;
+    background-position-y:top;
+    background-size:auto;
+    background-origin:padding-box;
+    background-clip:border-box;
+    background-color:rgb(255,255,255);
+    margin-right:8px;
+    border-top-color:#ccc;
+    border-right-color:#ccc;
+    border-bottom-color:#ccc;
+    border-left-color:#ccc;
+    border-top-width:1px;
+    border-right-width:1px;
+    border-bottom-width:1px;
+    border-left-width:1px;
+    border-top-style:solid;
+    border-right-style:solid;
+    border-bottom-style:solid;
+    border-left-style:solid;
+}
+.mytxt:focus {
+     border: 1px solid #fafafa;
+    -webkit-box-shadow: 0px 0px 6px #007eff;
+     -moz-box-shadow: 0px 0px 5px #007eff;
+     box-shadow: 0px 0px 5px #007eff;
+    
+}
+	</style>
+	<link rel="stylesheet" href="http://www.bootcss.com/p/buttons/css/buttons.css">
+	<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+	</head>
+<body>
+<div class='container'>
+	<h3 class='explainer'>
+	图片隐写术加密、图片隐写术解密 - 堕络's Blog
+	</h3>
+	<div id="header_ad">
+	<!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<ins class="adsbygoogle gg_ad_shake"
+	style="display:block"
+	data-ad-client="ca-pub-7292810486004926"
+	data-ad-slot="9220497478"
+	data-ad-format="auto"></ins>
+	<script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+	</script> -->
+	<script type="text/javascript">
+	/*20:3 创建于 2016-04-09*/
+	var cpro_id = "u2594670";
+	</script>
+	<script src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript">
+	</script>
+	</div>
+	<div class='divider'>
+	</div>
+	<h4 class="strong">
+	一、生成带隐藏信息的图片
+	</h4>
+	<div class='divider'>
+	</div>
+	<div class='row'>
+	<div class='span'>
+	1. 从电脑中选择一张用于加密信息的图片：
+	</div>
+	<div class='span'>
+	<input type="file" accept="image/*" id="origin_image" onchange="importImage();"
+	/>
+	</div>
+	</div>
+	<div class='row'>
+	<div class='span'>
+	2. 输入你要隐藏到图片中的文字信息：
+	</div>
+	<div class='span six'>
+	<input type="text" class="mytxt" placeholder="隐藏文字，比如：cxl，我爱你" id="secret_text"
+	/>
+	</div>
+	</div>
+	<div class='row'>
+	<div class='span'>
+	3. 输入需要解开信息的密码：
+	</div>
+	<div class='span six'>
+	<input type="password" class="mytxt" placeholder="信息查看密码，可以为空即为不加密"
+	id="secret_pwd" />
+	</div>
+	</div>
+	<div>
+	<button class="button button-glow button-border button-rounded button-primary" onclick="javascript:encode()" type="button">
+	生成带隐藏信息的图片
+	</button>
+	</div>
+	<div class="alert success">
+	<canvas id="result_image" class="hidden">
+	</canvas>
+	<div id="encode_tip" class="strong green">
+	</div>
+	<img id='result_image_output' />
+	</div>
+	<div class='divider'>
+	</div>
+	<h4 class="strong">
+	二、、解密带隐藏信息的图片
+	</h4>
+	<div class='divider'>
+	</div>
+	<div class='row'>
+	<div class='span'>
+	1. 从电脑中选择一张带有隐藏信息的图片：
+	</div>
+	<div class='span'>
+	<input type="file" accept="image/*" id="decode_image" onchange="javascript:selectEncodeImage()"
+	/>
+	</div>
+	</div>
+	<div class='row'>
+	<div class='span'>
+	2. 输入需要解开信息的密码（如果没有密码可以不填）：
+	</div>
+	<div class='span six'>
+	<input type="password" class="mytxt" placeholder="信息查看密码，可以为空即为图片解密不需要密码"
+	id="decode_pwd" />
+	</div>
+	</div>
+	<div>
+	<button class="button button-glow button-border button-rounded button-primary"  onclick="javascript:decode()" type="button">
+	解密出隐藏的信息
+	</button>
+	</div>
+	<div class="alert success">
+	<canvas id="decode_result_image" class="hidden">
+	</canvas>
+	<div class="strong" id="messageDecoded">
+	</div>
+	</div>
+	<script src='http://cdn.atool.org/res/steganography_files/sjcl.js' type='text/javascript'>
+	</script>
+	<script src='http://cdn.atool.org/res/steganography_files/main.js' type='text/javascript'>
+	</script>
+	<div class='divider'>
+	</div>
+	<h4 class='explainer'>
+	说明 | Introduce
+	</h4>
+	<ul class="new_tools_list">
+	<li>
+	隐写术算是一种加密技术，权威的wiki说法是“隐写术是一门关于信息隐藏的技巧与科学，所谓信息隐藏指的是不让除预期的接收者之外的任何人知晓信息的传递事件或者信息的内容。
+	</li>
+	<li>
+	这个工具可以在图片中隐藏文字信息，并且不影响图片的显示，只有特殊的工具才能解密出图片的内容。
+	</li>
+	<li>
+	图片隐写术的应用价值很广泛，比如程序员之间的表白（不限男女），不失为一种浪漫的方式~
+	</li>
+	<li>
+	有个成功案例就是大众点评通过这种方式，成功证明食神app对其图片的盗用，为自己的合法权益进行了有效维护。
+	</li>
+	</ul>
+	<div class='divider'>
+	</div>
+</html>	
